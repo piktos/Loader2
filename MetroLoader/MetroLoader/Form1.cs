@@ -29,7 +29,7 @@ namespace MetroLoader
         {
             metroCheckBox1.Checked = true;
 
-            hwidstring = HWDI.GetMachineGuid();
+            hwidstring = HWID.GetMachineGuid();
 
             metroTextBox1.Text = Properties.Settings.Default.Username;
             metroTextBox2.Text = Properties.Settings.Default.Password;

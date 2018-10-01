@@ -5,7 +5,7 @@ using Microsoft.Win32;
 
 namespace HWIDGrabber
 {
-    class HWDI
+    class HWID
     {
         public static string GetMachineGuid()
         {
