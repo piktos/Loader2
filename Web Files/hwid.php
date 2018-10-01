@@ -1,45 +1,43 @@
 <?php
 $ini = parse_ini_file('config.ini');
-$link = mysqli_connect($ini['db_host'],$ini['db_user'],$ini['db_password']);
-$database = mysqli_select_db($link,$ini['db_name']);
+
+$usertable_name = $ini['mybb_usertable'];
+
+$link = mysqli_connect($ini['db_host'], $ini['db_user'], $ini['db_password']);
+$database = mysqli_select_db($link, $ini['db_name']);
 
 $user = $_GET['username'];
 $hwid = $_GET['hwid'];
-$tables = $ini['mybb_usertable'];
+
+$user_sql = mysqli_real_escape_string($link, $user);
+$hwid_sql = mysqli_real_escape_string($link, $hwid);
 
 // Finding the user for the continuation of this script
-$sql = "SELECT * FROM ". $tables ." WHERE username = '". mysqli_real_escape_string($link,$user) ."'" ;
+$sql = "SELECT * FROM $usertable_name WHERE `username` = '$user_sql'" ;
 $result = $link->query($sql);
 
-if(strlen($hwid) < 1)
-{
+if(strlen($hwid) < 1) {
 	echo "2"; // HWID Empty
 }
-else
-{
+else {
 	if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
-			if (strlen($row['hwid']) > 1)
-			{
-				if ($hwid != $row['hwid'])
-				{
+			if (strlen($row['hwid']) > 1) {
+				if ($hwid != $row['hwid']) {
 					echo "0"; // Wrong
 				}
-				else
-				{
+				else {
 					echo "1"; // Correct
 				}
 			}
-			else
-			{
-				$sql = "UPDATE ". $tables ." SET hwid='$hwid' WHERE username='$user'";
-				if(mysqli_query($link, $sql))
-				{
+			else {
+				$sql = "UPDATE $usertable_name SET `hwid` = '$hwid_sql' WHERE `username` = '$user_sql'";
+				if(mysqli_query($link, $sql)) {
+					// HACK: possible xss, consider htmlentities()
 					echo $row['hwid'];
 					echo "3"; // HWID Set
 				}
-				else
-				{
+				else {
 					echo "4"; // Else errors
 				}
 			}
