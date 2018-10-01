@@ -1,20 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using MetroFramework.Forms;
-using System.Threading;
+using System;
 using System.Net;
-using System.Security;
-using System.IO;
-using System.Collections;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
+using System.Threading;
+using System.Windows.Forms;
 
 // 284, 261
 
@@ -22,17 +10,13 @@ namespace MetroLoader
 {
     public partial class Form4 : MetroForm
     {
-
         bool admin;
         bool premium;
-
 
         public Form4()
         {
             InitializeComponent();
         }
-
-        private Form1 otherForm = new Form1();
 
         private void Form4_Load(object sender, EventArgs e)
         {
@@ -71,7 +55,6 @@ namespace MetroLoader
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-
             if (metroRadioButton1.Checked == true) // Premium
             {
                 WebClient wb = new WebClient();
@@ -92,9 +75,9 @@ namespace MetroLoader
             var form2 = new Form2();
             form2.Closed += (s, args) => this.Close();
             form2.Show();
-            }
         }
     }
+}
 
 //-----------------------------------------------------
 // Coded by /id/Thaisen! Free loader source

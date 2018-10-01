@@ -9,19 +9,19 @@ namespace HWIDGrabber
     {
         public static string GetMachineGuid()
         {
-            string location = @"SOFTWARE\Microsoft\Cryptography";
-            string name = "MachineGuid";
+            var location = @"SOFTWARE\Microsoft\Cryptography";
+            var name = "MachineGuid";
 
-            using (RegistryKey localMachineX64View = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+            using (var localMachineX64View = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
             {
-                using (RegistryKey rk = localMachineX64View.OpenSubKey(location))
+                using (var rk = localMachineX64View.OpenSubKey(location))
                 {
                     if (rk == null)
-                        throw new KeyNotFoundException(string.Format("Key Not Found: {0}", location));
+                        throw new KeyNotFoundException($"Key Not Found: {location}");
 
-                    object machineGuid = rk.GetValue(name);
+                    var machineGuid = rk.GetValue(name);
                     if (machineGuid == null)
-                        throw new IndexOutOfRangeException(string.Format("Index Not Found: {0}", name));
+                        throw new IndexOutOfRangeException($"Index Not Found: {name}");
 
                     return machineGuid.ToString();
                 }

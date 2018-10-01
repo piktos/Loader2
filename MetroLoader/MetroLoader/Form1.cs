@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using MetroFramework.Forms;
 using HWIDGrabber;
+using MetroFramework.Forms;
+using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Windows.Forms;
 
 /*
  * Size: 355, 237
@@ -33,11 +27,7 @@ namespace MetroLoader
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             metroCheckBox1.Checked = true;
-
-            var steam = "steam";
-            var starget = Process.GetProcessesByName(steam).FirstOrDefault();
 
             hwidstring = HWDI.GetMachineGuid();
 
@@ -103,7 +93,6 @@ namespace MetroLoader
 
         private void webBrowser3_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-
             if (hwid == true)
             {
                 // HWID is incorrect
@@ -131,14 +120,12 @@ namespace MetroLoader
                 else if (webBrowser3.DocumentText.Contains("3"))
                 {
                     DialogResult dialogResult = MessageBox.Show("HWID Has Been Set!" + Environment.NewLine + "HWID: " + hwidstring + Environment.NewLine + "You will need your current HWID to change it later!" + Environment.NewLine + "Press yes to copy the text to your clipboard, no to not.", "HWID Set", MessageBoxButtons.YesNo);
+                    
                     if (dialogResult == DialogResult.Yes)
                     {
                         Clipboard.SetText(hwidstring);
                     }
-                    else if (dialogResult == DialogResult.No)
-                    {
 
-                    }
                     hwid = false;
 
                     this.Hide();
@@ -153,11 +140,6 @@ namespace MetroLoader
                     hwid = false;
                 }
             }
-        }
-
-        private void webBrowser4_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-
         }
     }
 }
